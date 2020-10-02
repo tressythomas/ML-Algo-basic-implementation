@@ -1,0 +1,51 @@
+#Distance measures
+# 1. Nominal 
+x=as.factor(sample(10,50,replace = TRUE))
+y=as.factor(sample(10,50,replace = TRUE))
+z=as.factor(sample(10,50,replace = TRUE))
+df=cbind(x,y,z)
+#Hamming Distance = is the number of positions at which the corresponding digits are different.
+ham.dist<-function(df){
+  h.dist=matrix(,nrow=nrow(df),ncol=nrow(df))
+  for (i in 1:(nrow(df)-1)){
+    for (j in i:nrow(df)){
+      h.temp=0
+      for (x in 1:ncol(df)){
+        if (df[i,x]!=df[j,x]){
+          h.temp=h.temp+1
+        }
+      }
+      h.dist[i,j]=as.numeric(h.temp)
+      h.dist[j,i]=h.dist[i,j] 
+       
+  }
+}
+return (h.dist)
+}
+
+d=t(ham.dist(df))
+h.sim=abs(1-d)    
+#check with package e1071 hammingfunction
+oh=hamming.distance(df)
+table(d,oh)
+##JACCARD DISTANCE
+jacc.dist<-function(df){
+  j.dist=matrix(0,nrow=nrow(df),ncol=nrow(df))
+  for (i in 1:(nrow(df)-1)){
+    for (j in i:nrow(df)){
+      len.inter=0
+      len.inter=length(intersect(df[i,],df[j,]))
+      len.union=length(union(df[i,],df[j,]))
+      
+      j.dist[i,j]=len.inter/len.union
+      j.dist[j,i]=j.dist[i,j] 
+      
+    }
+  }
+  return (j.dist) 
+}
+jacc.d=jacc.dist(df)
+#check with package philentropy distance function method "jaccard"
+library(philentropy)
+jd=distance(df,method= "jaccard")
+table(jacc.d,jd)
