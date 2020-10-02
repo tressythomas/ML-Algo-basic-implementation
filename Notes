@@ -1,0 +1,24 @@
+Hyperparameter - NOT automatically learned by the model instead they have to be set manually.
+<High bias ==> Underfit, High Variance ==> Overfit
+if the variance increases, the spread of our data point increases which results in less accurate prediction.
+And as the bias increases the error between our predicted value and the observed values increases.
+
+Regression
+
+Simple Linear Regression - Line of fit, assumption of normality
+Polynomial Regression - the maximum power of the independent variable > 1
+Ridge Regression - shrinks the parameters, therefore it is mostly used to prevent multicollinearity.
+                   reduces the model complexity by coefficient shrinkage.
+
+
+Lasso regression: https://www.statisticshowto.com/lasso-regression/
+
+Lasso regression is a type of linear regression that uses shrinkage. Shrinkage is where data values are shrunk towards a central point, like the mean. 
+Lasso regression performs L1 regularization, which adds a penalty equal to the absolute value of the magnitude of coefficients. This type of regularization can result in sparse models with few coefficients; Some coefficients can become zero and eliminated from the model. 
+Lasso solutions are quadratic programming problems with a goal to minimize  sum of squares with constraint
+
+A tuning parameter, λ controls the strength of the L1 penalty -->When λ = 0, no parameters are eliminated. The estimate is equal to the one found with linear regression.
+As λ increases, more and more coefficients are set to zero and eliminated (theoretically, when λ = ∞, all coefficients are eliminated).
+As λ increases, bias increases.
+As λ decreases, variance increases.
+
