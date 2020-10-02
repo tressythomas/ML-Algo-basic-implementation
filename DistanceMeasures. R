@@ -49,3 +49,34 @@ jacc.d=jacc.dist(df)
 library(philentropy)
 jd=distance(df,method= "jaccard")
 table(jacc.d,jd)
+#Euclidean Distance
+ec.dist<-function(df){
+  e.dist=matrix(0,nrow=nrow(df),ncol=nrow(df))
+  for (i in 1:(nrow(df)-1)){
+    for (j in i:nrow(df)){
+      e.dist[i,j]= sqrt(sum((df[i,]-df[j,])^2))
+      e.dist[j,i]=e.dist[i,j]
+      }
+  }
+  return (t(e.dist))
+}
+ed=ec.dist(df)
+#compare with dist function
+dist(df)
+
+#Manhattan distance
+manh.dist<-function(df){
+  m.dist=matrix(0,nrow=nrow(df),ncol=nrow(df))
+  for (i in 1:(nrow(df)-1)){
+    for (j in i:nrow(df)){
+      m.dist[i,j]=sum(abs(df[i,]-df[j,]))
+      m.dist[j,i]=m.dist[i,j]
+    }
+  }
+  return (t(m.dist))
+}
+md=manh.dist(df)
+#compare with dist function
+dist(df,method="manhattan")
+
+#Minkowski distance
