@@ -32,7 +32,8 @@ HA: The distribution is NOT normal
             o Equal Frequency: Divides the range into N intervals, each interval with same number of observations. 
             ??problem - not meaningful for cat variables in the dataset.
     
-                            1. Decide the number of intervals, N. When N is large- more orig info is retained. when N is small- good for subsequent learner algo. 
+                            1. Decide the number of intervals, N. 
+                            When N is large- more orig info is retained. when N is small- good for subsequent learner algo. 
                             Rule of thumb. N= #observation/(3*number of classes)
                             2. Width of each interval, W.
              o Clustering             
