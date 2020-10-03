@@ -1,4 +1,4 @@
-#Normalization
+#Normalization checks and tests
 dataset=iris
 hist(dataset$Sepal.Length,breaks=20)
 boxplot(dataset$Sepal.Length)
