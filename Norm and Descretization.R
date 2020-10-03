@@ -1,0 +1,25 @@
+#Normalization
+dataset=iris
+hist(dataset$Sepal.Length,breaks=20)
+boxplot(dataset$Sepal.Length)
+#Min Max
+tf=dataset$Sepal.Length
+norm.mmtf=(tf-min(tf))/(max(tf)-min(tf))
+#z-score
+norm.ztf=(tf-mean(tf))/sd(tf)
+norm.ztf
+#decimal scaling
+x=floor(log10(max(tf) )) + 1
+norm.dtf=tf/10^x
+# Normality tests # p <.05 NOT NORMAL 
+#Shapiro is preferred and powerful. Univariate
+ntest.sh=shapiro.test(dataset$Sepal.Length)
+ntest.sh
+#Anderson-Darling Test -  gives more weight to the tails of the distribution.
+library(nortest)
+ntest.ad=ad.test(dataset$Sepal.Length)
+ntest.ad
+#Kolmogorov-Smirnov Test. For variance 
+ntest.ks=ks.test(dataset$Sepal.Length,dataset$Sepal.Length)
+ntest.ks
+
