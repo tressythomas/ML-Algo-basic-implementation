@@ -3,31 +3,32 @@
 tv=iris$Species;c=length(levels(tv)) #target variable class
 tf=iris$Petal.Length
 
-bins=floor(length(tf)/(3*c))
-W=(max(tf)-min(tf))/bins
-lb=min(tf);ub=lb+W
-ix=order(tf) #get the idex before sorting
-tf=sort(tf,decreasing=FALSE)
-b=1
-for (i in 1:length(tf)){
-  
-  if(tf[i]<=ub && tf[i]>=lb){
-    tf.discrete[i]=b
+ew.disc<-function(tf,c){
+  bins=floor(length(tf)/(3*c))+1 # Calculate the no:of bins by using the thump rule
+  W=(max(tf)-min(tf))/bins       # Calculate width 
+  lb=min(tf);ub=lb+W             # Calcualte initial lower and upper bound
+  ix=data.frame(o=order(tf),rn=1:length(tf));ix=ix[order(ix$o),] # Get the index before sorting
+  tf=sort(tf,decreasing=FALSE) 
+  b=1
+  for (i in 1:length(tf)){
+    if(tf[i]<ub && tf[i]>=lb){
+      tf.discrete[i]=b
     }else{
-    tf.discrete[i]=b+1
-    b=b+1
-    lb=ub
-    ub=ub+W
-    
+      b=b+1
+      tf.discrete[i]=b 
+      lb=ub
+      ub=ub+W
     }
+  }
+  tf.discrete=tf.discrete[ix$rn]
+  return(tf.discrete)
 }
-tf.discrete=tf.discrete[ix]
 
 #Equal Frequency
 tv=iris$Species;c=length(levels(tv)) #target variable class
 tf=iris$Petal.Length
 bins=floor(length(tf)/(3*c))
-ix=order(tf) #get the idex before sorting
+ix=data.frame(o=order(tf),rn=1:length(tf));ix=ix[order(ix$o),] # Get the index before sorting
 tf=sort(tf,decreasing=FALSE)
 W=floor(length(tf)/bins)
 bound=W
@@ -42,4 +43,4 @@ for (i in 1:length(tf)){
     
   }
 }
-tf.discrete=tf.discrete[ix]
+ tf.discrete=tf.discrete[ix$rn]
